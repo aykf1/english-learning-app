@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f1">
+  <meta name="description" content="İngilizce kelimeleri kartlar ve mini testlerle öğren.">
+  <title>Lingua — İngilizce Öğren</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="specialty-words.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <a class="brand" href="#home" aria-label="Lingua ana sayfa"><span class="brand-icon">L</span><span>lingua<span class="brand-dot">.</span></span></a>
+      <p class="nav-caption">ÖĞRENME ALANI</p>
+      <nav class="main-nav" aria-label="Ana gezinme">
+        <button class="nav-link active" data-view="home"><span>⌂</span> Ana sayfa</button>
+        <button class="nav-link" data-view="cards"><span>▣</span> Kelime kartları</button>
+        <button class="nav-link" data-view="quiz"><span>✳</span> Mini test</button>
+        <button class="nav-link" data-view="words"><span>▤</span> Kelime defterim</button>
+      </nav>
+      <div class="sidebar-note"><span>🌱</span><p>Her gün birkaç kelime. Küçük adımlar büyük fark yaratır.</p></div>
+      <div class="profile-chip"><span class="avatar">F</span><span><b>İngilizce</b><small>Başlangıç seviyesi</small></span><span class="online-dot"></span></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div><span class="topbar-label">BUGÜNÜN ÖĞRENME YOLCULUĞU</span><h1 id="page-title">Merhaba! 👋</h1></div><div class="topbar-tools"><label class="level-control"><span>Seviyem</span><select id="level-select" aria-label="İngilizce seviyeni seç"><option value="ALL">Tüm seviyeler</option><option value="A1">A1 · Başlangıç</option><option value="A2">A2 · Temel</option><option value="B1">B1 · Orta</option><option value="B2">B2 · Orta üstü</option></select></label><div class="topbar-date" id="today-date"></div></div></header>
+
+      <section class="view active" id="view-home">
+        <div class="welcome-banner">
+          <div><span class="banner-kicker">HER GÜN BİR ADIM</span><h2>İngilizceni<br>geliştirmeye hazır mısın?</h2><p>Kısa bir tekrar bile ilerlemedir. Bugün başlayalım!</p><button class="primary-button" data-go="cards">Kelime çalış <span>→</span></button></div>
+          <div class="banner-art" aria-hidden="true"><span class="art-sun">☀</span><span class="art-book">📖</span><span class="art-star star-one">✦</span><span class="art-star star-two">✦</span><span class="art-leaf">✿</span></div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon mint">📚</span><span class="stat-label">Seçili listedeki kelimeler</span><strong id="stat-total">0</strong><small>kelime</small></article>
+          <article class="stat-card"><span class="stat-icon lilac">✨</span><span class="stat-label">Öğrendiklerim</span><strong id="stat-known">0</strong><small>kelime</small></article>
+          <article class="stat-card"><span class="stat-icon peach">🔥</span><span class="stat-label">Öğrenme serim</span><strong id="stat-streak">0</strong><small>gün</small></article>
+          <article class="stat-card"><span class="stat-icon butter">🎯</span><span class="stat-label">Bugünkü hedefim</span><strong><span id="stat-today">0</span><i> / 5</i></strong><small>kelime tekrarı</small></article>
+        </div>
+
+        <div class="home-columns">
+          <section class="panel daily-panel">
+            <div class="panel-heading"><div><span class="section-kicker">KÜÇÜK BİR HEDEF</span><h3>Bugünkü çalışma</h3></div><span class="panel-emoji">🌼</span></div>
+            <div class="daily-progress"><div class="daily-progress-fill" id="daily-progress-fill"></div></div>
+            <p class="daily-copy" id="daily-copy">5 kelime tekrarla ve günlük hedefini tamamla.</p>
+            <button class="text-button" data-go="quiz">Mini teste başla <span>→</span></button>
+          </section>
+          <section class="panel quick-panel">
+            <div class="panel-heading"><div><span class="section-kicker">HIZLI BAŞLANGIÇ</span><h3>Bugün ne yapmak istersin?</h3></div></div>
+            <button class="quick-action" data-go="cards"><span class="quick-icon green">▣</span><span><b>Kelime kartları</b><small>Gör, çevir, tekrar et</small></span><span class="chevron">›</span></button>
+            <button class="quick-action" data-go="quiz"><span class="quick-icon purple">✳</span><span><b>Mini test</b><small>Bildiklerini dene</small></span><span class="chevron">›</span></button>
+            <button class="quick-action" data-go="words"><span class="quick-icon yellow">＋</span><span><b>Kelime ekle</b><small>Kendi kelime defterini kur</small></span><span class="chevron">›</span></button>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-cards">
+        <div class="view-intro"><span class="section-kicker">GÖR • HATIRLA • ÖĞREN</span><h2>Kelime kartları</h2><p>Tıp, eğitim, mühendislik ve daha birçok alandan bir uzmanlık seç; her alanda 200 kelime seni bekliyor. Dört seviyeyi birlikte görebilir veya tek bir seviyeye odaklanabilirsin.</p></div>
+        <div class="study-toolbar"><label for="card-category">Konu</label><select id="card-category"></select><label for="card-specialty">Uzmanlık</label><select id="card-specialty"></select><span id="card-counter">1 / 1</span></div>
+        <article class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Kartı çevirmek için tıkla">
+          <span class="card-topline" id="card-category-label">GÜNLÜK</span><span class="card-hint" id="card-hint">Anlamını hatırlamaya çalış</span>
+          <strong class="card-word" id="card-word">hello</strong><span class="card-pronunciation" id="card-pronunciation">/həˈləʊ/</span>
+          <span class="card-divider"></span><span class="card-answer-label" id="card-answer-label">ÇEVİRİYİ GÖRMEK İÇİN DOKUN</span><strong class="card-translation" id="card-translation" hidden>merhaba</strong>
+        </article>
+        <div class="card-actions"><button class="secondary-button" id="review-button">↻ Tekrar et</button><button class="success-button" id="know-button">✓ Öğrendim</button></div>
+        <p class="study-feedback" id="study-feedback" aria-live="polite"></p>
+      </section>
+
+      <section class="view" id="view-quiz">
+        <div class="view-intro"><span class="section-kicker">KENDİNİ DENE</span><h2>Mini test</h2><p>İngilizce kelimenin Türkçe karşılığını seç. Yanlış cevaplar da öğrenmenin bir parçası!</p></div>
+        <div class="quiz-panel panel">
+          <div class="quiz-progress-row"><span id="quiz-question-number">SORU 1</span><span id="quiz-score">0 doğru</span></div>
+          <div class="quiz-progress"><span id="quiz-progress-fill"></span></div>
+          <span class="quiz-prompt">Bu kelimenin Türkçe anlamı nedir?</span>
+          <h3 class="quiz-word" id="quiz-word">journey</h3>
+          <div class="answer-grid" id="answer-grid"></div>
+          <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+          <button class="primary-button quiz-next" id="quiz-next" hidden>Sonraki soru <span>→</span></button>
+        </div>
+      </section>
+
+      <section class="view" id="view-words">
+        <div class="view-intro"><span class="section-kicker">SANA ÖZEL</span><h2>Kelime defterim</h2><p>Öğrendiğin veya çalışmak istediğin kelimeleri burada topla.</p></div>
+        <form class="word-form panel" id="word-form">
+          <div class="form-heading"><span class="section-kicker">YENİ BİR KELİME EKLE</span><span>✍️</span></div>
+          <label for="new-english">İngilizce kelime</label><input id="new-english" maxlength="40" placeholder="Örn. sunshine" required>
+          <label for="new-turkish">Türkçe anlamı</label><input id="new-turkish" maxlength="60" placeholder="Örn. güneş ışığı" required>
+          <div class="form-bottom"><div><label for="new-category">Konu</label><select id="new-category"></select></div><div><label for="new-specialty">Uzmanlık alanı</label><select id="new-specialty"></select></div><div><label for="new-level">Kelime seviyesi</label><select id="new-level"><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option></select></div><button class="primary-button" type="submit">Kelimeyi ekle <span>＋</span></button></div>
+        </form>
+        <div class="word-list-heading"><h3>Kelimelerim <span id="word-list-count">0</span></h3><div class="word-filters"><input id="word-search" type="search" placeholder="Kelime ara..." aria-label="Kelime ara"><select id="word-category-filter" aria-label="Konuya göre filtrele"></select><select id="word-specialty-filter" aria-label="Uzmanlık alanına göre filtrele"></select></div></div>
+        <div class="word-list" id="word-list"></div>
+        <p class="no-words" id="no-words" hidden>Bu aramada kelime bulunamadı.</p>
+      </section>
+      <footer class="footer-note">Her uzman bir zamanlar yeni başlıyordu. Devam et! <span>💚</span></footer>
+    </main>
+  </div>
+</body>
+</html>
